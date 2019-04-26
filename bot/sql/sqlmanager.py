@@ -2,6 +2,7 @@ import pandas as pd
 import pyodbc
 
 class SqlManager(object):
+	# Also hide default value of parameters)
     def __init__(self,driver,server,db,trusted_connection = True,user=None,pwd=None):
         if trusted_connection == True:
             self.conn_str = ';'.join(['DRIVER={' + driver + '}', 'SERVER=' + server, 'DATABASE=' + db, 'Trusted_Connection=yes'])
@@ -23,9 +24,6 @@ class SqlManager(object):
         except pyodbc.Error as error:
             print('Error:',error.args[1])
             return None
-        # else:
-        #     conn.commit()
-        #     return(pd.DataFrame(result))
 
 class SqlAlertDeadlockAnnouncer(object):
     def __init__(self, lock_limit=10):
